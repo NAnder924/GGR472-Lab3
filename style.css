@@ -39,8 +39,8 @@ p {
 
 .legend-box { /* legend box details */
     position: absolute;
-    top: 80px;
-    right: 1vw;
+    top: 120px;
+    right: 20px;
     width: 28vw;
     padding: 15px;
     background: white;
@@ -64,9 +64,10 @@ p {
 }
 /* colour of red circle in legend */
 .red {
-    background: #B33951;
+    background: orange;
 }
 /* colour of blue circle in legend */
 .blue {
-    background-color: #284B63;
+    background-color: blue;
 }
+
