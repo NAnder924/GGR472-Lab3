@@ -1,11 +1,11 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kZXI5MjQiLCJhIjoiY201b2RweHNhMGxjazJscTI0cm92MDNuOCJ9.DUSIWV2_-BR0a9LOqhn15w';
-let initialZoom = 10.5
+let initialZoom = 10.5 //initial zoom
 let currentIndex = 0
 
-// Listen for carousel slide changes
+// carousel slide
 $('#carousel').on('slide.bs.carousel', function (event) {
-    currentIndex = event.to; // Get the new active slide index
+    currentIndex = event.to; 
     createMap(initialZoom)
 });
 
@@ -58,32 +58,32 @@ const createMap = (zoomValue) => {
 				'circle-stroke-color': 'rgb(41, 14, 159)' //border of circle colour
 			}
 		})
-
+            //filter legend variables based on carousel slide
         const updateLayerVisibility = (index) => {
-            if (index === 0) {
+            if (index === 0) { //first slide both visible
                 map.setLayoutProperty('public-art-layer', 'visibility', 'visible');
                 map.setLayoutProperty('community-gardens-and-food-trees', 'visibility', 'visible');
-            } else if (index === 1) {
+            } else if (index === 1) { //second slide first variable visible only
                 map.setLayoutProperty('public-art-layer', 'visibility', 'visible');
                 map.setLayoutProperty('community-gardens-and-food-trees', 'visibility', 'none');
-            } else if (index === 2) {
+            } else if (index === 2) { //third slide second variable visible only
                 map.setLayoutProperty('public-art-layer', 'visibility', 'none');
                 map.setLayoutProperty('community-gardens-and-food-trees', 'visibility', 'visible');
             }
         };
-
+            //variable visibility based on the cuurent carousel slide
         updateLayerVisibility(currentIndex)
 	});
 }
 
 createMap(initialZoom)
 // creating legend popout and map characteristics
-
+//zoom in every 0.5 per button press
 const zoomIn = () => {
     initialZoom += 0.5
     createMap(initialZoom)
 }
-
+//zoom out every 0.5 per button press
 const zoomOut = () => {
     initialZoom -= 0.5
     createMap(initialZoom)
