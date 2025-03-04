@@ -1,14 +1,17 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kZXI5MjQiLCJhIjoiY201b2RweHNhMGxjazJscTI0cm92MDNuOCJ9.DUSIWV2_-BR0a9LOqhn15w';
+let initialZoom = 10.5
 
 //creating map
 const createMap = (zoomValue) => {
     const carousel = document.getElementById("carousel")
     carousel.style.zIndex = "-100"
+    const indicator = document.getElementById("carousel-indicators")
+
 	const map = new mapboxgl.Map({
 		container: 'map', 
 		style: 'mapbox://styles/ander924/cm6sdtrs2004t01qshcd17pgy', // style URL
-		center: [-123.126, 49.249], // starting view [lng, lat]
+		center: [-123.086, 49.249], // starting view [lng, lat]
 		zoom: zoomValue, // starting zoom
 		minZoom: zoomValue //can't zoom out
 	})
@@ -28,7 +31,7 @@ const createMap = (zoomValue) => {
 				'circle-radius': 3, //circle radius size
 				'circle-color': 'orange',  //colour of circle
 				'circle-stroke-width': 0.5, //border of circle width
-				'circle-stroke-color': 'dark orange' //border of circle colour
+				'circle-stroke-color': 'rgb(252, 134, 0)' //border of circle colour
 			}
 		});
 	
@@ -46,14 +49,45 @@ const createMap = (zoomValue) => {
 				'circle-radius': 3, //circle radius size
 				'circle-color': 'blue', //colour of circle
 				'circle-stroke-width': 1, //border of circle width
-				'circle-stroke-color': 'dark blue' //border of circle colour
+				'circle-stroke-color': 'rgb(41, 14, 159)' //border of circle colour
 			}
 		})
+        const updateLayerVisibility = (index) => {
+            if (index === 0) {
+                map.setLayoutProperty('public-art-layer', 'visibility', 'visible');
+                map.setLayoutProperty('community-gardens-and-food-trees', 'visibility', 'visible');
+            } else if (index === 1) {
+                map.setLayoutProperty('public-art-layer', 'visibility', 'visible');
+                map.setLayoutProperty('community-gardens-and-food-trees', 'visibility', 'none');
+            } else if (index === 2) {
+                map.setLayoutProperty('public-art-layer', 'visibility', 'none');
+                map.setLayoutProperty('community-gardens-and-food-trees', 'visibility', 'visible');
+            }
+        };
+
+        // Listen for carousel slide changes
+        $('#carousel').on('slide.bs.carousel', function (event) {
+            const newIndex = event.to; // Get the new active slide index
+            updateLayerVisibility(newIndex);
+        });
+
+        // Set initial visibility based on first slide
+        updateLayerVisibility(0);
 	});
 }
 
-createMap(11)
+createMap(initialZoom)
 // creating legend popout and map characteristics
+
+const zoomIn = () => {
+    initialZoom += 0.5
+    createMap(initialZoom)
+}
+
+const zoomOut = () => {
+    initialZoom -= 0.5
+    createMap(initialZoom)
+}
 
 // making button change from show legend to hide legend depending if opened or not
 const renameButton = () => {
@@ -72,17 +106,3 @@ const renameButton = () => {
         carousel.style.zIndex = "100"
     }
 }
-
-// document.getElementById('button').addEventListener('click', () => {
-// 	const mapDiv = document.getElementById('map');
-// //if map has this view than create map11, otherwise create map10.5
-// 	 if (mapDiv.style.width === '70vw') {//map view width 70%
-// 		mapDiv.style.width='100vw' //map view width 100%
-// 		mapDiv.style.height='100vh' //map view height 100%
-// 		createMap(11)
-// 	} else {
-// 		mapDiv.style.width='70vw' //map view width 70%
-// 		mapDiv.style.height='100vh' //map view height 100%
-// 		createMap(10.5)
-// 	}
-// })

@@ -20,6 +20,21 @@
             Community Resources in Vancouver
         </h1>
         <!-- button in header to show and hide legend -->
+        <div>
+            <button class="btn" onclick="zoomIn()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>
+            </button>
+            <button class="btn" onclick="zoomOut()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"/>
+                  </svg>
+            </button>
+            <button class="btn" onclick="createMap(10)">
+                Reset
+            </button>
+        </div>
         <button class="btn" id="button" onclick="renameButton()">
             Show Legend
         </button>
@@ -27,30 +42,37 @@
     <!-- text within legend -->
     <div id="legend" class="legend-box">
         <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
-            <ol class="carousel-indicators">
-              <li data-target="#carousel" data-slide-to="0" class="active"></li>
-              <li data-target="#carousel" data-slide-to="1"></li>
-              <li data-target="#carousel" data-slide-to="2"></li>
-            </ol>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <p>This map displays public art installations and community gardens across Vancouver, revealing their proximity to parks.</p>
-                <!-- legend items -->
-                <div class="legend-item">
-                    <span class="legend-circle red"></span> Public Art installations
-                </div>
-                <div class="legend-item">
-                    <span class="legend-circle blue"></span> Community Gardens & Food Trees
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="legend-item">
-                    <span class="legend-circle red"></span> Public Art installations
+                <div class="legend-text-box">
+                    <p>This map displays public art installations and community gardens across Vancouver, revealing their proximity to parks. Enjoy the read!</p>
+                    <!-- legend items -->
+                    <div class="legend-item">
+                        <span class="legend-circle red"></span> Public Art installations
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-circle blue"></span> Community Gardens & Food Trees
+                    </div>
                 </div>
               </div>
               <div class="carousel-item">
-                <div class="legend-item">
-                    <span class="legend-circle blue"></span> Community Gardens & Food Trees
+                <div class="legend-text-box">
+                    <p>This map displays public art installations across Vancouver. For more information regarding Vancouver's public art follow this link below...
+                        <a href="https://vancouver.ca/parks-recreation-culture/explore-the-public-art-registries.aspx" target="_blank"> Explore Public Art</a>
+                    </p>
+                    <div class="legend-item">
+                        <span class="legend-circle red"></span> Public Art installations
+                    </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="legend-text-box">
+                    <p>This map displays community gardens across Vancouver. For more information about community gardens in Vancouver follow the link below... 
+                        <a href="https://vancouver.ca/people-programs/community-gardens.aspx" target="_blank">Explore Community Gardens</a>
+                    </p>
+                    <div class="legend-item">
+                        <span class="legend-circle blue"></span> Community Gardens & Food Trees
+                    </div>
                 </div>
               </div>
             </div>
