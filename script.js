@@ -1,12 +1,18 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kZXI5MjQiLCJhIjoiY201b2RweHNhMGxjazJscTI0cm92MDNuOCJ9.DUSIWV2_-BR0a9LOqhn15w';
 let initialZoom = 10.5
+let currentIndex = 0
+
+// Listen for carousel slide changes
+$('#carousel').on('slide.bs.carousel', function (event) {
+    currentIndex = event.to; // Get the new active slide index
+    createMap(initialZoom)
+});
 
 //creating map
 const createMap = (zoomValue) => {
     const carousel = document.getElementById("carousel")
     carousel.style.zIndex = "-100"
-    const indicator = document.getElementById("carousel-indicators")
 
 	const map = new mapboxgl.Map({
 		container: 'map', 
@@ -52,6 +58,7 @@ const createMap = (zoomValue) => {
 				'circle-stroke-color': 'rgb(41, 14, 159)' //border of circle colour
 			}
 		})
+
         const updateLayerVisibility = (index) => {
             if (index === 0) {
                 map.setLayoutProperty('public-art-layer', 'visibility', 'visible');
@@ -65,14 +72,7 @@ const createMap = (zoomValue) => {
             }
         };
 
-        // Listen for carousel slide changes
-        $('#carousel').on('slide.bs.carousel', function (event) {
-            const newIndex = event.to; // Get the new active slide index
-            updateLayerVisibility(newIndex);
-        });
-
-        // Set initial visibility based on first slide
-        updateLayerVisibility(0);
+        updateLayerVisibility(currentIndex)
 	});
 }
 
